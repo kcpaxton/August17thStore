@@ -244,6 +244,8 @@
         public static string ShippingRestrictionListButtons => "admin_shipping_restriction_list_buttons";
         public static string ShippingDetailsBlock => "admin_shipping_details_block";
         public static string ShippingSettingsButtons => "admin_shipping_settings_buttons";
+        public static string ShopHoursDetailsBlock => "admin_shophours_details_block";
+        public static string ShopHoursSettingsButtons => "admin_shophours_settings_buttons";
         public static string ShoppingCartSettingsDetailsBlock => "admin_shopping_cart_settings_details_block";
         public static string ShoppingCartSettingsButtons => "admin_shopping_cart_settings_buttons";
         public static string SpecificationAttributeDetailsBlock => "admin_specification_attribute_details_block";

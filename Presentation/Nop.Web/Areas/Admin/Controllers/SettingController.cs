@@ -958,7 +958,21 @@ namespace Nop.Web.Areas.Admin.Controllers
 
             return RedirectToAction("Media");
         }
+        public virtual IActionResult ShopHours()
+        {
 
+            //prepare model
+            var model = _settingModelFactory.PrepareShopHoursSettingsModel();
+
+            return View(model);
+        }
+        [HttpPost]
+        public virtual IActionResult ShopHours(ShopHoursModel model)
+        {
+
+
+            return RedirectToAction("ShopHours");
+        }
         public virtual IActionResult CustomerUser()
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageSettings))
@@ -969,6 +983,8 @@ namespace Nop.Web.Areas.Admin.Controllers
 
             return View(model);
         }
+        
+
         [HttpPost]
         public virtual IActionResult CustomerUser(CustomerUserSettingsModel model)
         {

@@ -82,6 +82,12 @@ namespace Nop.Web.Areas.Admin.Factories
         MediaSettingsModel PrepareMediaSettingsModel();
 
         /// <summary>
+        /// Prepare shop hours ettings model
+        /// </summary>
+        /// <returns>ShopHours settings model</returns>
+        ShopHoursModel PrepareShopHoursSettingsModel();
+
+        /// <summary>
         /// Prepare customer user settings model
         /// </summary>
         /// <returns>Customer user settings model</returns>

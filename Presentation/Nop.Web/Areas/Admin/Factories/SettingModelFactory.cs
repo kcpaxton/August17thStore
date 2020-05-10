@@ -1298,6 +1298,22 @@ namespace Nop.Web.Areas.Admin.Factories
         /// Prepare customer user settings model
         /// </summary>
         /// <returns>Customer user settings model</returns>
+        public virtual ShopHoursModel PrepareShopHoursSettingsModel()
+        {
+            var model = new ShopHoursModel
+            {
+                
+            };
+
+
+            return model;
+        }
+
+
+        /// <summary>
+        /// Prepare customer user settings model
+        /// </summary>
+        /// <returns>Customer user settings model</returns>
         public virtual CustomerUserSettingsModel PrepareCustomerUserSettingsModel()
         {
             var model = new CustomerUserSettingsModel
