@@ -1,0 +1,64 @@
+﻿@using Nop.Core.Domain.HoursOfOperation
+@model List<ShopHours>
+@{
+    //page title
+    ViewBag.Title = T("Admin.Configuration.ShopHours").Text;
+    //active menu item (system name)
+    Html.SetActiveMenuItemSystemName("Shop Hours");
+}
+
+<nop-antiforgery-token />
+<div class="content-header clearfix">
+    <h1 class="pull-left">
+        @T("Admin.Configuration.ShopHours")
+    </h1>
+    <div class="pull-right">
+        <button type="submit" name="save" class="btn bg-blue">
+            <i class="fa fa-floppy-o"></i>
+            @T("Admin.Configuration.ShopHours.Save")
+        </button>
+    </div>
+
+</div>
+
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class=" col-md-3">
+                        <span>Day of the week</span>
+                    </div>
+                    <div class=" col-md-3">
+                        <span>Opening time</span>
+                    </div>
+                    <div class=" col-md-3">
+                        <span>Closing time</span>
+                    </div>
+                    <div class=" col-md-3">
+                        <span>Closed</span>
+                    </div>
+
+                    @foreach (var shopHours in Model)
+                        {
+                            <div class=" col-md-3">
+
+                                <span>@shopHours.Weekday</span>
+                            </div>
+                            <div class=" col-md-3">
+                                @Html.DropDownListFor(shopHours.StartHour, ViewBag.TimeList, "Start Hour", new { @class = "form-control" });
+                                <span>@shopHours.StartHour</span>
+                            </div>
+                            <div class=" col-md-3">
+                                <span>@shopHours.EndHour</span>
+                            </div>
+                            <div class=" col-md-3">
+                                <span>@shopHours.Closed</span>
+                            </div>
+                        }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
