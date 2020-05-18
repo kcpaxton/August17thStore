@@ -24,6 +24,7 @@ using Nop.Core.Domain.Tasks;
 using Nop.Core.Domain.Tax;
 using Nop.Core.Domain.Topics;
 using Nop.Core.Domain.Vendors;
+using Nop.Core.Domain.Hours;
 using Nop.Core.Infrastructure.Mapper;
 using Nop.Services.Authentication.External;
 using Nop.Services.Cms;
@@ -42,6 +43,7 @@ using Nop.Web.Areas.Admin.Models.Directory;
 using Nop.Web.Areas.Admin.Models.Discounts;
 using Nop.Web.Areas.Admin.Models.ExternalAuthentication;
 using Nop.Web.Areas.Admin.Models.Forums;
+using Nop.Web.Areas.Admin.Models.Hours;
 using Nop.Web.Areas.Admin.Models.Localization;
 using Nop.Web.Areas.Admin.Models.Logging;
 using Nop.Web.Areas.Admin.Models.Messages;
@@ -84,6 +86,7 @@ namespace Nop.Web.Areas.Admin.Infrastructure.Mapper
             CreateDiscountsMaps();
             CreateForumsMaps();
             CreateGdprMaps();
+            CreateHoursOfOperationMaps();
             CreateLocalizationMaps();
             CreateLoggingMaps();
             CreateMediaMaps();
@@ -102,6 +105,7 @@ namespace Nop.Web.Areas.Admin.Infrastructure.Mapper
             CreateTopicsMaps();
             CreateVendorsMaps();
             CreateWarehouseMaps();
+
 
             //add some generic mapping rules
             ForAllMaps((mapConfiguration, map) =>
@@ -1005,6 +1009,16 @@ namespace Nop.Web.Areas.Admin.Infrastructure.Mapper
                 .ForMember(model => model.CustomerInfo, options => options.Ignore())
                 .ForMember(model => model.RequestType, options => options.Ignore())
                 .ForMember(model => model.CreatedOn, options => options.Ignore());
+        }
+
+
+        /// <summary>
+        /// Create  HoursOfOperation maps
+        /// </summary>
+        protected virtual void CreateHoursOfOperationMaps()
+        {
+            CreateMap<HoursOfOperation, HoursOfOperationModel>();
+            CreateMap<HoursOfOperationModel, HoursOfOperation>();
         }
 
         /// <summary>

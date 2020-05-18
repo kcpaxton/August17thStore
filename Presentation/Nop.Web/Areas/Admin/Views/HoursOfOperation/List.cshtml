@@ -1,0 +1,67 @@
+﻿@using Nop.Web.Areas.Admin.Models.Hours
+@model ShopHoursModel
+
+@{
+    //page title
+    ViewBag.Title = T("Admin.Configuration.ShopHours").Text;
+    //active menu item (system name)
+    Html.SetActiveMenuItemSystemName("Shop Hours");
+}
+
+<nop-antiforgery-token />
+<form asp-controller="HoursOfOperation" asp-action="List" method="post">
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            @T("Admin.Configuration.ShopHours")
+        </h1>
+        <div class="pull-right">
+            <button type="submit" name="save" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.Save")
+            </button>
+        </div>
+    </div>
+
+
+    <div class="content">
+        <div class="form-horizontal">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-offset-1 col-md-1">
+                                <span>Open Time </span>
+                            </div>
+                            <div class="col-md-1">
+                                <span>Close Time </span>
+                            </div>
+                            <div class="col-md-1">
+                                <span>Closed </span>
+                            </div>
+                        </div>
+                        @for (int i = 0; i < Model.ShopHoursObjects.Count; i++)
+                        {
+                            @Html.HiddenFor(m => m.ShopHoursObjects[i].Id)
+                            @Html.HiddenFor(m => m.ShopHoursObjects[i].Weekday)
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <span>@Model.ShopHoursObjects[i].Weekday</span>
+                                </div>
+                                <div class="col-md-1">
+                                    @Html.DropDownListFor(m => m.ShopHoursObjects[i].StartHourId, new SelectList(Model.ListOfHours, "Id", "ShopTime", Model.ShopHoursObjects[i].StartHourId))
+                                </div>
+                                <div class="col-md-1">
+                                    @Html.DropDownListFor(m => m.ShopHoursObjects[i].EndHourID, new SelectList(Model.ListOfHours, "Id", "ShopTime", Model.ShopHoursObjects[i].EndHourID))
+                                </div>
+                            </div>
+
+                        }
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
