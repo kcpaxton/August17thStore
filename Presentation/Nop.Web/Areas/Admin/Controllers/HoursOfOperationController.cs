@@ -16,7 +16,7 @@ namespace Nop.Web.Areas.Admin.Controllers
         #endregion
 
         #region Ctor
-        public HoursOfOperationController(IHoursOfOperationService hoursOfOperationService, IHoursOfOperationModelFactory hoursOfOperationModelFactory)
+        public HoursOfOperationController(IHoursOfOperationService hoursOfOperationService)
         {
             _hoursOfOperationService = hoursOfOperationService;
         }

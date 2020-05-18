@@ -86,7 +86,6 @@ namespace Nop.Web.Areas.Admin.Infrastructure.Mapper
             CreateDiscountsMaps();
             CreateForumsMaps();
             CreateGdprMaps();
-            CreateHoursOfOperationMaps();
             CreateLocalizationMaps();
             CreateLoggingMaps();
             CreateMediaMaps();
@@ -1011,15 +1010,6 @@ namespace Nop.Web.Areas.Admin.Infrastructure.Mapper
                 .ForMember(model => model.CreatedOn, options => options.Ignore());
         }
 
-
-        /// <summary>
-        /// Create  HoursOfOperation maps
-        /// </summary>
-        protected virtual void CreateHoursOfOperationMaps()
-        {
-            CreateMap<HoursOfOperation, HoursOfOperationModel>();
-            CreateMap<HoursOfOperationModel, HoursOfOperation>();
-        }
 
         /// <summary>
         /// Create localization maps 
