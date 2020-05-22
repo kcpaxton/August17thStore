@@ -54,6 +54,7 @@ namespace Nop.Services.Hours
 
             shopHours.StartHourId = shopHours.StartHourId;
             shopHours.EndHourID = shopHours.EndHourID;
+            shopHours.Closed = shopHours.Closed;
             _shopHoursRepository.Update(shopHours);
 
             //event notification

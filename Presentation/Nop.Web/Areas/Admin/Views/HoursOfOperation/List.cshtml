@@ -28,7 +28,7 @@
             <div class="panel-group">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <div class="row">
+                        <div class="row row-hours">
                             <div class="col-md-offset-1 col-md-1">
                                 <span>Open Time </span>
                             </div>
@@ -43,19 +43,22 @@
                         {
                             @Html.HiddenFor(m => m.ShopHoursObjects[i].Id)
                             @Html.HiddenFor(m => m.ShopHoursObjects[i].Weekday)
-                            <div class="row">
+                            <div class="row row-hours">
                                 <div class="col-md-1">
                                     <span>@Model.ShopHoursObjects[i].Weekday</span>
                                 </div>
                                 <div class="col-md-1">
-                                    @Html.DropDownListFor(m => m.ShopHoursObjects[i].StartHourId, new SelectList(Model.ListOfHours, "Id", "ShopTime", Model.ShopHoursObjects[i].StartHourId))
+                                    @Html.DropDownListFor(m => m.ShopHoursObjects[i].StartHourId, new SelectList(Model.ListOfHours, "Id", "ShopTime", Model.ShopHoursObjects[i].StartHourId), new { @id = "StartHour-" + i, @class = "form-control" })
                                 </div>
                                 <div class="col-md-1">
-                                    @Html.DropDownListFor(m => m.ShopHoursObjects[i].EndHourID, new SelectList(Model.ListOfHours, "Id", "ShopTime", Model.ShopHoursObjects[i].EndHourID))
+                                    @Html.DropDownListFor(m => m.ShopHoursObjects[i].EndHourID, new SelectList(Model.ListOfHours, "Id", "ShopTime", Model.ShopHoursObjects[i].EndHourID), new { @id = "EndHour-" + i, @class = "form-control" })
+                                </div>
+                                <div class="col-md-1">
+                                    @Html.CheckBoxFor(m => m.ShopHoursObjects[i].Closed, new { @id = i, @class = "closed-checkbox"})
                                 </div>
                             </div>
 
-                        }
+                               }
 
 
 
@@ -65,3 +68,31 @@
         </div>
     </div>
 </form>
+<script>
+    $(function () {
+
+        $('.closed-checkbox').each(function () {
+            //var selects = $('div[id="' + $(this).val() + '"] select');
+            if ($(this).is(':checked')) {
+                // disable the dropdown:
+                $('#StartHour-' + this.id).attr('disabled', 'disabled');
+                $('#EndHour-' + this.id).attr('disabled', 'disabled');
+            } else {
+                $('#StartHour-' + this.id).removeAttr('disabled');
+                $('#EndHour-' + this.id).removeAttr('disabled');
+            }
+        });
+        $('.closed-checkbox').change(function () {
+            //var selects = $('div[id="' + $(this).val() + '"] select');
+            if ($(this).is(':checked')) {
+                // disable the dropdown:
+                $('#StartHour-' + this.id).attr('disabled', 'disabled');
+                $('#EndHour-' + this.id).attr('disabled', 'disabled');
+            } else {
+                $('#StartHour-' + this.id).removeAttr('disabled');
+                $('#EndHour-' + this.id).removeAttr('disabled');
+            }
+        });
+
+    });
+</script>
