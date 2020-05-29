@@ -1,0 +1,23 @@
+﻿@model Nop.Plugin.Widgets.TimeSlots.Models.ReservationSlotsModel
+@{
+    Layout = "";
+
+    Html.AddCssFileParts("~/Plugins/Widgets.TimeSlots/Content/time-slots.css");
+}
+<div class="container">
+    <div class="btn-group time-slot-group" role="group">
+
+        @Html.DropDownListFor(m => m.ChosenTime, new SelectList(Model.ListOfTimes))
+
+        @*@foreach (var item in Model.ListOfTimeSlots)
+        {
+            <div class="col">
+                <label class="time-slot-btn">
+                    @Html.RadioButton("ReservationTime", item.FriendlyName, new { @class = "time-slot-radio" }) @item.FriendlyName
+                </label>
+
+            </div>
+        }*@
+    </div>
+
+</div>
