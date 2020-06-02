@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
 using Nop.Core;
 using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Common;
@@ -370,6 +371,11 @@ namespace Nop.Services.Orders
             /// Order total
             /// </summary>
             public decimal OrderTotal { get; set; }
+
+            /// <summary>
+            /// Pickup Time for order
+            /// </summary>
+            public string PickupTime { get; set; }
         }
 
         #endregion
@@ -586,6 +592,9 @@ namespace Nop.Services.Orders
             details.TaxRates = taxRatesDictionary.Aggregate(string.Empty, (current, next) =>
                 $"{current}{next.Key.ToString(CultureInfo.InvariantCulture)}:{next.Value.ToString(CultureInfo.InvariantCulture)};   ");
 
+            //PickupTime
+            details.PickupTime = processPaymentRequest.PickupTime;
+
             //order total (and applied discounts, gift cards, reward points)
             var orderTotal = _orderTotalCalculationService.GetShoppingCartTotal(details.Cart, out var orderDiscountAmount, out var orderAppliedDiscounts, out var appliedGiftCards, out var redeemedRewardPoints, out var redeemedRewardPointsAmount);
             if (!orderTotal.HasValue)
@@ -795,6 +804,7 @@ namespace Nop.Services.Orders
                 SubscriptionTransactionId = processPaymentResult.SubscriptionTransactionId,
                 PaymentStatus = processPaymentResult.NewPaymentStatus,
                 PaidDateUtc = null,
+                PickupTime = processPaymentRequest.PickupTime,
                 BillingAddress = details.BillingAddress,
                 ShippingAddress = details.ShippingAddress,
                 ShippingStatus = details.ShippingStatus,

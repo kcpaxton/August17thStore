@@ -1,7 +1,9 @@
 ﻿@model FooterModel
 @using Nop.Core
 @using Nop.Core.Domain.Tax
+@using Nop.Services.Hours 
 @inject IWorkContext workContext;
+@inject IHoursOfOperationService hoursOfOperationService;
 <div class="footer">
     <div class="footer-upper">
         <div class="footer-block information">
@@ -23,7 +25,7 @@
                 }
             </ul>
         </div>
-        <div class="footer-block customer-service">
+        @*<div class="footer-block customer-service">
             <div class="title">
                 <strong>@T("Footer.CustomerService")</strong>
             </div>
@@ -65,7 +67,7 @@
                     <li><a href="@Url.RouteUrl("CheckGiftCardBalance")">@T("CheckGiftCardBalance")</a></li>
                 }
             </ul>
-        </div>
+        </div>*@
         <div class="footer-block my-account">
             <div class="title">
                 <strong>@T("Footer.MyAccount")</strong>
@@ -101,7 +103,29 @@
                 }
             </ul>
         </div>
-        <div class="footer-block follow-us">
+       <div class="footer-block shopHours">
+            <div class="title">
+                <strong>@T("Footer.ShopHours")</strong>
+            </div>
+            <ul class="list">
+                @foreach (var item in Model.ShopHours)
+                {
+                    if (item.Closed)
+                    {
+                        <li>@item.Weekday: Closed </li>
+                    }
+                    else
+                    {
+                        <li>@item.Weekday: @hoursOfOperationService.GetFriendlyTimeById(item.StartHourId) - @hoursOfOperationService.GetFriendlyTimeById(item.EndHourID) </li>
+
+                    }
+                }
+            </ul>
+        </div>
+       <div class="footer-block">
+           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2833.1541733102836!2d-96.6849232843616!3d44.757270388354065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8789e16d76f1e163%3A0x6e473264bfd8e89a!2sAugust%2017th%20Gourmet%20Coffee%20and%20Sandwich%20Shoppe!5e0!3m2!1sen!2sus!4v1590971560555!5m2!1sen!2sus" width="400" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+       </div>
+        @*<div class="footer-block follow-us">
             <div class="social">
                 <div class="title">
                     <strong>@T("Footer.FollowUs")</strong>
@@ -109,7 +133,7 @@
                 @await Component.InvokeAsync("SocialButtons")
             </div>
             @await Component.InvokeAsync("NewsletterBox")
-        </div>
+        </div>*@
     </div>
     <div class="footer-lower">
         <div class="footer-info">

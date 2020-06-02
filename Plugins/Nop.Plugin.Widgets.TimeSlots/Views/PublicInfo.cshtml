@@ -6,18 +6,16 @@
 }
 <div class="container">
     <div class="btn-group time-slot-group" role="group">
-
-        @Html.DropDownListFor(m => m.ChosenTime, new SelectList(Model.ListOfTimes))
-
-        @*@foreach (var item in Model.ListOfTimeSlots)
+        @if (Model.ListOfTimes.Count == 0)
         {
-            <div class="col">
-                <label class="time-slot-btn">
-                    @Html.RadioButton("ReservationTime", item.FriendlyName, new { @class = "time-slot-radio" }) @item.FriendlyName
-                </label>
+            <span>We're Sorry! The store is closed or there are no more available pickup times for today.</span>
+        }
+        else
+        {
+            <span>Select a time to pick up your order.</span>
+            @Html.DropDownListFor(m => m.ChosenTime, new SelectList(Model.ListOfTimes))
+        }
 
-            </div>
-        }*@
     </div>
 
 </div>

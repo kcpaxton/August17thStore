@@ -187,7 +187,7 @@ namespace Nop.Web.Models.ShoppingCart
             public string ShippingMethod { get; set; }
 
             public string PaymentMethod { get; set; }
-
+            public string PickupTime { get; set; }
             public Dictionary<string, object> CustomValues { get; set; }
         }
 

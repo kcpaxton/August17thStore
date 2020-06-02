@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Nop.Core;
+using Nop.Core.Domain.ReservationTimeSlots;
 using Nop.Data;
 using Nop.Data.Extensions;
-using Nop.Plugin.Widgets.TimeSlots.Domain;
 
 namespace Nop.Plugin.Widgets.TimeSlots.Data
 {

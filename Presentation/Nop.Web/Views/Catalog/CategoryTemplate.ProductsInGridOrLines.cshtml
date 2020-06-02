@@ -24,7 +24,7 @@
     var breadcrumbDelimiter = commonSettings.BreadcrumbDelimiter;
 }
 @*category breadcrumb*@
-@section Breadcrumb
+@*@section Breadcrumb
     {
     @if (Model.DisplayCategoryBreadcrumb)
     {
@@ -61,7 +61,7 @@
         </div>
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsAfterBreadcrumb, additionalData = Model })
     }
-}
+}*@
 <div class="page category-page">
     <div class="page-title">
         <h1>@Model.Name</h1>
@@ -120,6 +120,7 @@
             </div>
         }
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.CategoryDetailsAfterFeaturedProducts, additionalData = Model })
+
         @if (Model.Products.Count > 0)
         {
             @await Html.PartialAsync("_CatalogSelectors", Model.PagingFilteringContext)
@@ -152,6 +153,7 @@
                 </div>
             </div>
         }
+
         @{
             var pager = Html.Pager(Model.PagingFilteringContext).QueryParam("pagenumber");
         }

@@ -53,6 +53,9 @@
                                 <div class="col-md-1">
                                     @Html.DropDownListFor(m => m.ShopHoursObjects[i].EndHourID, new SelectList(Model.ListOfHours, "Id", "ShopTime", Model.ShopHoursObjects[i].EndHourID))
                                 </div>
+                                <div class="col-md-1">
+                                    @Html.CheckBoxFor(m => m.ShopHoursObjects[i].Closed, Model.ShopHoursObjects[i].Closed)
+                                </div>
                             </div>
 
                         }

@@ -102,6 +102,10 @@ namespace Nop.Services.Payments
         /// </summary>
         public int RecurringTotalCycles { get; set; }
 
+        /// <summary>
+        /// Gets or sets the total cycles
+        /// </summary>
+        public string PickupTime { get; set; }
         #endregion
 
         /// <summary>

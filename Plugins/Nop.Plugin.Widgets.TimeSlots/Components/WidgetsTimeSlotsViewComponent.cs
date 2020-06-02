@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Nop.Core;
 using Nop.Core.Caching;
 using Nop.Plugin.Widgets.TimeSlots.Models;
-using Nop.Plugin.Widgets.TimeSlots.Services;
 using Nop.Services.Configuration;
 using Nop.Services.Media;
+using Nop.Services.ReservationTimeSlots;
 using Nop.Web.Framework.Components;
 
 namespace Nop.Plugin.Widgets.TimeSlots.Components
@@ -46,5 +46,6 @@ namespace Nop.Plugin.Widgets.TimeSlots.Components
             model.ListOfTimes = _timeSlotService.GetAllTimes(model.ListOfTimeSlots);
             return View("~/Plugins/Widgets.TimeSlots/Views/PublicInfo.cshtml", model);
         }
+
     }
 }

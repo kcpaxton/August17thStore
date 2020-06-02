@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Nop.Plugin.Widgets.TimeSlots.Domain;
 using Nop.Web.Framework.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
-
+using Nop.Core.Domain.ReservationTimeSlots;
 
 namespace Nop.Plugin.Widgets.TimeSlots.Models
 {

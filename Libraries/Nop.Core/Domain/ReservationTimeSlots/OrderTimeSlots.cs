@@ -1,12 +1,11 @@
-﻿using Nop.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Nop.Plugin.Widgets.TimeSlots.Domain
+namespace Nop.Core.Domain.ReservationTimeSlots
 {
     public partial class OrderTimeSlots : BaseEntity
-    { 
+    {
         public TimeSpan ReservationTime { get; set; }
 
         public string FriendlyName { get; set; }

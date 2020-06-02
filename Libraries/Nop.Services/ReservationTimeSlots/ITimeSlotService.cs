@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Nop.Plugin.Widgets.TimeSlots.Domain;
+using Nop.Core.Domain.ReservationTimeSlots;
 
-namespace Nop.Plugin.Widgets.TimeSlots.Services
+namespace Nop.Services.ReservationTimeSlots
 {
     public partial interface ITimeSlotService
     {
@@ -12,5 +11,7 @@ namespace Nop.Plugin.Widgets.TimeSlots.Services
 
         IList<string> GetAllTimes(List<OrderTimeSlots> times);
 
+        OrderTimeSlots GetTimeSlotByTime(string pickupTime);
+        void UpdatePickupTime(OrderTimeSlots orderTimeSlots);
     }
 }

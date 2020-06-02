@@ -28,6 +28,7 @@ using Nop.Services.Common;
 using Nop.Services.Customers;
 using Nop.Services.Directory;
 using Nop.Services.Forums;
+using Nop.Services.Hours;
 using Nop.Services.Localization;
 using Nop.Services.Media;
 using Nop.Services.News;
@@ -65,6 +66,7 @@ namespace Nop.Web.Factories
         private readonly IForumService _forumService;
         private readonly IGenericAttributeService _genericAttributeService;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IHoursOfOperationService _hoursOfOperationService;
         private readonly ILanguageService _languageService;
         private readonly ILocalizationService _localizationService;
         private readonly IManufacturerService _manufacturerService;
@@ -113,6 +115,7 @@ namespace Nop.Web.Factories
             IForumService forumService,
             IGenericAttributeService genericAttributeService,
             IHttpContextAccessor httpContextAccessor,
+            IHoursOfOperationService hoursOfOperationService,
             ILanguageService languageService,
             ILocalizationService localizationService,
             IManufacturerService manufacturerService,
@@ -157,6 +160,7 @@ namespace Nop.Web.Factories
             _forumService = forumService;
             _genericAttributeService = genericAttributeService;
             _httpContextAccessor = httpContextAccessor;
+            _hoursOfOperationService = hoursOfOperationService;
             _languageService = languageService;
             _localizationService = localizationService;
             _manufacturerService = manufacturerService;
@@ -477,7 +481,8 @@ namespace Nop.Web.Factories
                 DisplayCustomerAddressesFooterItem = _displayDefaultFooterItemSettings.DisplayCustomerAddressesFooterItem,
                 DisplayShoppingCartFooterItem = _displayDefaultFooterItemSettings.DisplayShoppingCartFooterItem,
                 DisplayWishlistFooterItem = _displayDefaultFooterItemSettings.DisplayWishlistFooterItem,
-                DisplayApplyVendorAccountFooterItem = _displayDefaultFooterItemSettings.DisplayApplyVendorAccountFooterItem
+                DisplayApplyVendorAccountFooterItem = _displayDefaultFooterItemSettings.DisplayApplyVendorAccountFooterItem,
+                ShopHours = _hoursOfOperationService.GetAllShopHours()
             };
 
             return model;
@@ -501,6 +506,7 @@ namespace Nop.Web.Factories
             }
             model.SubjectEnabled = _commonSettings.SubjectFieldOnContactUsForm;
             model.DisplayCaptcha = _captchaSettings.Enabled && _captchaSettings.ShowOnContactUsPage;
+            model.ShopHours = _hoursOfOperationService.GetAllShopHours();
 
             return model;
         }

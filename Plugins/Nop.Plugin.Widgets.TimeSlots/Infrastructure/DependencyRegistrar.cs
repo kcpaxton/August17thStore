@@ -5,12 +5,12 @@ using Autofac;
 using Autofac.Core;
 using Nop.Core.Configuration;
 using Nop.Core.Data;
+using Nop.Core.Domain.ReservationTimeSlots;
 using Nop.Core.Infrastructure;
 using Nop.Core.Infrastructure.DependencyManagement;
 using Nop.Data;
 using Nop.Plugin.Widgets.TimeSlots.Data;
-using Nop.Plugin.Widgets.TimeSlots.Domain;
-using Nop.Plugin.Widgets.TimeSlots.Services;
+using Nop.Services.ReservationTimeSlots;
 using Nop.Web.Framework.Infrastructure.Extensions;
 
 namespace Nop.Plugin.Widgets.TimeSlots.Infrastructure

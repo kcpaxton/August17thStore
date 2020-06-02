@@ -8,6 +8,7 @@ using Nop.Core.Domain.Common;
 using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Orders;
 using Nop.Core.Domain.Payments;
+using Nop.Core.Domain.ReservationTimeSlots;
 using Nop.Core.Domain.Shipping;
 using Nop.Core.Http.Extensions;
 using Nop.Services.Common;
@@ -17,6 +18,7 @@ using Nop.Services.Localization;
 using Nop.Services.Logging;
 using Nop.Services.Orders;
 using Nop.Services.Payments;
+using Nop.Services.ReservationTimeSlots;
 using Nop.Services.Shipping;
 using Nop.Web.Extensions;
 using Nop.Web.Factories;
@@ -49,6 +51,7 @@ namespace Nop.Web.Controllers
         private readonly IShippingService _shippingService;
         private readonly IShoppingCartService _shoppingCartService;
         private readonly IStateProvinceService _stateProvinceService;
+        private readonly ITimeSlotService _timeSlotService;
         private readonly IStoreContext _storeContext;
         private readonly IWebHelper _webHelper;
         private readonly IWorkContext _workContext;
@@ -78,6 +81,7 @@ namespace Nop.Web.Controllers
             IShippingService shippingService,
             IShoppingCartService shoppingCartService,
             IStateProvinceService stateProvinceService,
+            ITimeSlotService timeSlotService,
             IStoreContext storeContext,
             IWebHelper webHelper,
             IWorkContext workContext,
@@ -103,6 +107,7 @@ namespace Nop.Web.Controllers
             _shippingService = shippingService;
             _shoppingCartService = shoppingCartService;
             _stateProvinceService = stateProvinceService;
+            _timeSlotService = timeSlotService;
             _storeContext = storeContext;
             _webHelper = webHelper;
             _workContext = workContext;
@@ -110,6 +115,7 @@ namespace Nop.Web.Controllers
             _paymentSettings = paymentSettings;
             _rewardPointsSettings = rewardPointsSettings;
             _shippingSettings = shippingSettings;
+
         }
 
         #endregion
@@ -1072,10 +1078,26 @@ namespace Nop.Web.Controllers
             {
                 update_section = new UpdateSectionJsonModel
                 {
-                    name = "confirm-order",
+                    name = "billing",
                     html = RenderPartialViewToString("OpcConfirmOrder", confirmOrderModel)
                 },
                 goto_section = "confirm_order"
+            });
+        }
+
+        protected virtual JsonResult OpcLoadStepAfterPickup(IList<ShoppingCartItem> cart)
+        {
+            var billingAddressModel = _checkoutModelFactory.PrepareBillingAddressModel(cart, prePopulateNewAddressWithCustomerFields: true);
+            billingAddressModel.NewAddressPreselected = false;
+            return Json(new
+            {
+                update_section = new UpdateSectionJsonModel
+                {
+                    name = "billing",
+                    html = RenderPartialViewToString("OpcBillingAddress", billingAddressModel)
+                },
+                goto_section = "billing",
+                wrong_billing_address = false,
             });
         }
 
@@ -1134,6 +1156,47 @@ namespace Nop.Web.Controllers
 
             var model = _checkoutModelFactory.PrepareOnePageCheckoutModel(cart);
             return View(model);
+        }
+
+        public virtual IActionResult OpcSavePickup(CheckoutBillingAddressModel model, IFormCollection form)
+        {
+            try
+            {
+                //validation
+                if (_orderSettings.CheckoutDisabled)
+                    throw new Exception(_localizationService.GetResource("Checkout.Disabled"));
+
+                var cart = _shoppingCartService.GetShoppingCart(_workContext.CurrentCustomer, ShoppingCartType.ShoppingCart, _storeContext.CurrentStore.Id);
+
+                if (!cart.Any())
+                    throw new Exception("Your cart is empty");
+
+                if (!_orderSettings.OnePageCheckoutEnabled)
+                    throw new Exception("One page checkout is disabled");
+
+                if (_workContext.CurrentCustomer.IsGuest() && !_orderSettings.AnonymousCheckoutAllowed)
+                    throw new Exception("Anonymous checkout is not allowed");
+
+                var chosenTime = form["ChosenTime"].ToString();
+                if(chosenTime != null && chosenTime != "")
+                {
+                    //session save
+                    HttpContext.Session.SetString("PickupTime", chosenTime);
+                }
+                else
+                {
+                    return Json(new { error = 1, message = "Something went wrong with the chosen pickup time. Try selecting a later time." });
+                }
+                
+                //load next step
+                return OpcLoadStepAfterPickup(cart);
+
+            }
+            catch (Exception exc)
+            {
+                _logger.Warning(exc.Message, exc, _workContext.CurrentCustomer);
+                return Json(new { error = 1, message = exc.Message });
+            }
         }
 
         public virtual IActionResult OpcSaveBilling(CheckoutBillingAddressModel model, IFormCollection form)
@@ -1658,10 +1721,24 @@ namespace Nop.Web.Controllers
                 processPaymentRequest.CustomerId = _workContext.CurrentCustomer.Id;
                 processPaymentRequest.PaymentMethodSystemName = _genericAttributeService.GetAttribute<string>(_workContext.CurrentCustomer,
                     NopCustomerDefaults.SelectedPaymentMethodAttribute, _storeContext.CurrentStore.Id);
+                processPaymentRequest.PickupTime = HttpContext.Session.GetString("PickupTime");
                 HttpContext.Session.Set<ProcessPaymentRequest>("OrderPaymentInfo", processPaymentRequest);
                 var placeOrderResult = _orderProcessingService.PlaceOrder(processPaymentRequest);
                 if (placeOrderResult.Success)
                 {
+                    //if successful payment register pickup slot as taken
+                    var pickupTime = HttpContext.Session.GetString("PickupTime");
+                    if (pickupTime == null || pickupTime == "")
+                    {
+                        return Json(new { error = 1, message = "Something went wrong with the chosen pickup time. Try selecting a later time." });
+                    }
+                    else
+                    {
+                        OrderTimeSlots orderTimeSlots = new OrderTimeSlots();
+                        orderTimeSlots = _timeSlotService.GetTimeSlotByTime(pickupTime);
+                        _timeSlotService.UpdatePickupTime(orderTimeSlots);
+                    }
+
                     HttpContext.Session.Set<ProcessPaymentRequest>("OrderPaymentInfo", null);
                     var postProcessPaymentRequest = new PostProcessPaymentRequest
                     {

@@ -297,6 +297,11 @@ namespace Nop.Core.Domain.Orders
         /// </summary>
         public string CustomOrderNumber { get; set; }
 
+        /// <summary>
+        /// Gets or sets pickup time for the order
+        /// </summary>
+        public string PickupTime { get; set; }
+
         #endregion
 
         #region Navigation properties

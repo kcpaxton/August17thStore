@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Nop.Core.Domain.ReservationTimeSlots;
 using Nop.Data.Mapping;
-using Nop.Plugin.Widgets.TimeSlots.Domain;
 
 namespace Nop.Plugin.Widgets.TimeSlots.Data
 {

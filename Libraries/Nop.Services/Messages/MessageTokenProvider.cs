@@ -234,6 +234,7 @@ namespace Nop.Services.Messages
                     "%Order.CreatedOn%",
                     "%Order.OrderURLForCustomer%",
                     "%Order.PickupInStore%",
+                    "%Order.PickupTime%",
                     "%Order.OrderId%"
                 });
 
@@ -940,6 +941,7 @@ namespace Nop.Services.Messages
             tokens.Add(new Token("Order.Shippable", !string.IsNullOrEmpty(order.ShippingMethod)));
             tokens.Add(new Token("Order.ShippingMethod", order.ShippingMethod));
             tokens.Add(new Token("Order.PickupInStore", order.PickupInStore));
+            tokens.Add(new Token("Order.PickupTime", order.PickupTime));
             tokens.Add(new Token("Order.ShippingFirstName", orderAddress(order)?.FirstName ?? string.Empty));
             tokens.Add(new Token("Order.ShippingLastName", orderAddress(order)?.LastName ?? string.Empty));
             tokens.Add(new Token("Order.ShippingPhoneNumber", orderAddress(order)?.PhoneNumber ?? string.Empty));
