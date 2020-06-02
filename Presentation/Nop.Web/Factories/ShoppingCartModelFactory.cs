@@ -685,7 +685,11 @@ namespace Nop.Web.Factories
             var processPaymentRequest = _httpContextAccessor.HttpContext?.Session?.Get<ProcessPaymentRequest>("OrderPaymentInfo");
             if (processPaymentRequest != null)
                 model.CustomValues = processPaymentRequest.CustomValues;
-
+            var selectedPickupTime = _httpContextAccessor.HttpContext?.Session?.GetString("PickupTime");
+            if (selectedPickupTime != null)
+            {
+                model.PickupTime = selectedPickupTime;
+            }
             return model;
         }
 

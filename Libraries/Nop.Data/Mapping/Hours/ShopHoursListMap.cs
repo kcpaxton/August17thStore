@@ -16,6 +16,8 @@ namespace Nop.Data.Mapping.Hours
 
             builder.Property(shopHoursList => shopHoursList.ShopTime);
 
+            builder.Property(shopHoursList => shopHoursList.FriendlyName);
+
             base.Configure(builder);
         }
     }

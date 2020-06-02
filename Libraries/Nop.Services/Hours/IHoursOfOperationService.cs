@@ -13,5 +13,6 @@ namespace Nop.Services.Hours
         List<ShopHours> GetAllShopHours();
         IList<ShopHoursList> GetShophoursList();
         void UpdateShopHours(ShopHours shopHours);
+        string GetFriendlyTimeById(int hoursId);
     }
 }

@@ -31,6 +31,20 @@ namespace Nop.Services.Hours
 
             return _shopHoursRepository.GetById(hoursId);
         }
+
+        public virtual string GetFriendlyTimeById(int hoursId)
+        {
+            if (hoursId == 0)
+                return null;
+
+            var query = from shl in _shopHoursListRepository.Table
+                        where shl.Id == hoursId
+                        select shl.FriendlyName;
+            return query.First();
+
+            
+
+        }
         public virtual List<ShopHours> GetAllShopHours()
         {
             var query = from sh in _shopHoursRepository.Table
@@ -39,6 +53,7 @@ namespace Nop.Services.Hours
             var shopHours = query.ToList();
             return shopHours;
         }
+
         public virtual IList<ShopHoursList> GetShophoursList()
         {
             var query = from sh in _shopHoursListRepository.Table
@@ -52,9 +67,6 @@ namespace Nop.Services.Hours
             if (shopHours == null)
                 throw new ArgumentNullException(nameof(shopHours));
 
-            shopHours.StartHourId = shopHours.StartHourId;
-            shopHours.EndHourID = shopHours.EndHourID;
-            shopHours.Closed = shopHours.Closed;
             _shopHoursRepository.Update(shopHours);
 
             //event notification

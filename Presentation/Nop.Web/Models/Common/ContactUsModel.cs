@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Nop.Web.Framework.Mvc.ModelBinding;
 using Nop.Web.Framework.Models;
+using Nop.Core.Domain.Hours;
+using System.Collections.Generic;
 
 namespace Nop.Web.Models.Common
 {
@@ -24,5 +26,7 @@ namespace Nop.Web.Models.Common
         public string Result { get; set; }
 
         public bool DisplayCaptcha { get; set; }
+
+        public List<ShopHours> ShopHours { get; set; }
     }
 }

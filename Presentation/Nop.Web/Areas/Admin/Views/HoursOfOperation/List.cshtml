@@ -56,6 +56,9 @@
                                 <div class="col-md-1">
                                     @Html.CheckBoxFor(m => m.ShopHoursObjects[i].Closed, new { @id = i, @class = "closed-checkbox"})
                                 </div>
+                                <div class="col-md-1">
+                                    @Html.CheckBoxFor(m => m.ShopHoursObjects[i].Closed, Model.ShopHoursObjects[i].Closed)
+                                </div>
                             </div>
 
                                }

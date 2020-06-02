@@ -1,0 +1,21 @@
+﻿@model Nop.Plugin.Widgets.TimeSlots.Models.ReservationSlotsModel
+@{
+    Layout = "";
+
+    Html.AddCssFileParts("~/Plugins/Widgets.TimeSlots/Content/time-slots.css");
+}
+<div class="container">
+    <div class="btn-group time-slot-group" role="group">
+        @if (Model.ListOfTimes.Count == 0)
+        {
+            <span>We're Sorry! The store is closed or there are no more available pickup times for today.</span>
+        }
+        else
+        {
+            <span>Select a time to pick up your order.</span>
+            @Html.DropDownListFor(m => m.ChosenTime, new SelectList(Model.ListOfTimes))
+        }
+
+    </div>
+
+</div>

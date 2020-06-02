@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Widgets",
+  "FriendlyName": "Time Slots",
+  "SystemName": "Widgets.TimeSlots",
+  "Version": "1",
+  "SupportedVersions": [ "4.20" ],
+  "Author": "Kyle Paxton",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Widgets.TimeSlots.dll",
+  "Description": "This plugin allows you to change the contents of main page slider"
+}

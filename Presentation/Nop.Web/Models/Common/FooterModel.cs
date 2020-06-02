@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Nop.Core.Domain.Hours;
 using Nop.Web.Framework.Models;
 
 namespace Nop.Web.Models.Common
@@ -43,7 +44,9 @@ namespace Nop.Web.Models.Common
         public bool DisplayCustomerAddressesFooterItem { get; set; }
         public bool DisplayShoppingCartFooterItem { get; set; }
         public bool DisplayWishlistFooterItem { get; set; }
-        public bool DisplayApplyVendorAccountFooterItem { get; set; }        
+        public bool DisplayApplyVendorAccountFooterItem { get; set; }
+
+        public List<ShopHours> ShopHours { get; set; }
 
         #region Nested classes
 

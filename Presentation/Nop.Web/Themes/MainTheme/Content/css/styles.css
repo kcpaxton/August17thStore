@@ -64,11 +64,11 @@ script {
 
 
 body {
-    max-width: 100%;
-	overflow-x: hidden;
-	background-color: #fff;
-	font: normal 14px Arial, Helvetica, sans-serif;
-    color: #777;
+  max-width: 100%;
+  overflow-x: hidden;
+  background-color: #fff;
+  font: normal 14px "Gill Sans", segoe ui, calibri;
+  color: #777;
 }
 h1,h2,h3,h4,h5,h6 {
 	color: #444;
@@ -95,9 +95,9 @@ textarea, select {
     vertical-align: middle;
 }
 input, textarea, select, button {
-	font-size: 14px;
-	font-family: Arial, Helvetica, sans-serif;
-	color: #777;
+  font-size: 14px;
+  font-family: "Gill Sans", segoe ui, calibri;
+  color: #777;
 }
 textarea {
 	min-height: 150px;
@@ -226,7 +226,11 @@ label, label + * {
 }
 .header-upper-container {
   border-bottom: 1px solid #ddd;
-  background-color: darkslategray;
+  background-color: #2d2009;
+}
+
+.flex-container{
+    display: flex;
 }
 
 /*********** GLOBAL FORMS ***********/
@@ -1320,10 +1324,7 @@ label, label + * {
 }
 
 .product-selectors {
-	margin: 0 0 20px;
-	border-top: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
-	padding: 20px 0;
+	margin: 0 0 10px;
 }
 .product-selectors:first-child {
 	border-top: none;
@@ -1353,7 +1354,6 @@ label, label + * {
 	display: table;
 	width: 100%;
 	margin: -20px 0 20px;
-	border-bottom: 1px solid #ddd;
 }
 .product-filter {
 	margin: 0 0 10px;
@@ -2806,9 +2806,23 @@ label, label + * {
 
 
 /*********** CONTACT & EMAIL A FRIEND & APPLY FOR VENDOR ACCOUNT ***********/
-
-
-
+.contact-map{
+    margin:2rem;
+}
+.contact-content {
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.contact-shophours-title{
+    color: #444;
+}
+.contact-shophours, .contact-shophours-title{
+    line-height: 1.5rem;
+    font-size: 16px;
+}
+.contact-shophours {
+  margin-bottom: 3rem;
+}
 .contact-page .page-title,
 .email-a-friend-page .page-title,
 .apply-vendor-page .page-title {
@@ -3870,12 +3884,12 @@ label, label + * {
 }
 .opc .step-title .number,
 .opc .step-title .title {
-	float: left;
-	min-height: 40px;
-	padding: 10px 15px;
-	line-height: 20px;
-	font-size: 16px;
-	font-weight: normal;
+  float: left;
+  min-height: 40px;
+  padding: 10px 15px;
+  line-height: 20px;
+  font-size: 16px;
+  font-weight: normal;
 }
 .opc .allow .step-title .number,
 .opc .allow .step-title .title {
@@ -6393,11 +6407,11 @@ pre {
 	background-color: #248ece;
 }
 
-.header-lower-container {
-  margin-bottom: 4rem;
-  border-bottom: 1px solid gray;
-  background-color: beige;
-}
+  .header-lower-container {
+    margin-bottom: 4rem;
+    border-bottom: 1px solid gray;
+    background-color: #ffecdc;
+  }
 .header-lower {
   display: table;
   width:95%;

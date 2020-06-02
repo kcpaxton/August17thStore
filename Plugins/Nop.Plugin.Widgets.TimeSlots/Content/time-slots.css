@@ -1,0 +1,15 @@
+﻿.time-slot-btn{
+
+}
+
+.time-slot-group{
+    margin-bottom:2rem;
+}
+
+.time-slot-radio{
+    visibility: hidden;
+}
+
+label.time-slot-radio{
+    cursor: pointer;
+}
