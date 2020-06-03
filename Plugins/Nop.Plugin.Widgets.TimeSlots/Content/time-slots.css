@@ -13,3 +13,7 @@
 label.time-slot-radio{
     cursor: pointer;
 }
+
+.pickup-label + div {
+  margin: 1rem;
+}

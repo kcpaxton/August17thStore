@@ -12,8 +12,10 @@
         }
         else
         {
-            <span>Select a time to pick up your order.</span>
-            @Html.DropDownListFor(m => m.ChosenTime, new SelectList(Model.ListOfTimes))
+            <label class="pickup-label" for="ChosenTime">Select a time to pick up your order.</label>
+            <div>
+                @Html.DropDownListFor(m => m.ChosenTime, new SelectList(Model.ListOfTimes))
+            </div>
         }
 
     </div>

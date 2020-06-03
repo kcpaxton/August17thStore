@@ -29,13 +29,13 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="row row-hours">
-                            <div class="col-md-offset-1 col-md-1">
+                            <div class="col-md-offset-1 col-md-2">
                                 <span>Open Time </span>
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-2">
                                 <span>Close Time </span>
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-2">
                                 <span>Closed </span>
                             </div>
                         </div>
@@ -47,21 +47,18 @@
                                 <div class="col-md-1">
                                     <span>@Model.ShopHoursObjects[i].Weekday</span>
                                 </div>
-                                <div class="col-md-1">
+                                <div class="col-md-2">
                                     @Html.DropDownListFor(m => m.ShopHoursObjects[i].StartHourId, new SelectList(Model.ListOfHours, "Id", "ShopTime", Model.ShopHoursObjects[i].StartHourId), new { @id = "StartHour-" + i, @class = "form-control" })
                                 </div>
-                                <div class="col-md-1">
+                                <div class="col-md-2">
                                     @Html.DropDownListFor(m => m.ShopHoursObjects[i].EndHourID, new SelectList(Model.ListOfHours, "Id", "ShopTime", Model.ShopHoursObjects[i].EndHourID), new { @id = "EndHour-" + i, @class = "form-control" })
                                 </div>
-                                <div class="col-md-1">
+                                <div class="col-md-2">
                                     @Html.CheckBoxFor(m => m.ShopHoursObjects[i].Closed, new { @id = i, @class = "closed-checkbox"})
-                                </div>
-                                <div class="col-md-1">
-                                    @Html.CheckBoxFor(m => m.ShopHoursObjects[i].Closed, Model.ShopHoursObjects[i].Closed)
                                 </div>
                             </div>
 
-                               }
+                        }
 
 
 

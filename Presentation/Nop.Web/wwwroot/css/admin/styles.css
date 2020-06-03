@@ -1237,6 +1237,12 @@ span.grid-report-item.red {
     color: #fff;
 }
 
+/*ShopHours*/
+
+.row-hours {
+  margin-bottom: 1rem;
+}
+
 /*SETTINGS*/
 .theme-selection-block .checkbox{
     float: left;
@@ -1813,9 +1819,6 @@ div.dataTables_wrapper div.dataTables_paginate{
     float: none;
   }
 
-/*ShopHours*/
 
-  .row-hours{
-      margin-bottom:1rem;
-  }
 }
+
